@@ -166,7 +166,9 @@ def mainworkflow(graph_list, color_file, labels, directed=True, weighted=True, o
             count += 1
         except:
             print("Error. Not processing "+str(inputgraph)+".")
-    Y = np.random.choice([0, 1], size=X.shape[0])
+    with open(labels, 'r') as file:
+        Y = [line.strip() for line in file]
+    Y = np.squeeze(Y)
     proteinCNN(X, Y, output)
 
 
