@@ -1,0 +1,6 @@
+tensorflow
+keras
+ugtm
+networkx
+gensim
+numpy
