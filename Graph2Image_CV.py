@@ -154,7 +154,8 @@ def mainworkflow(graph_list, color_file, labels, directed=True, weighted=True, o
             try:
                 words, transformed = graphEmbedding(inputgraph,
                                                     directed=directed,
-                                                    weighted=weighted)
+                                                    weighted=weighted,
+                                                    k=k)
                 density = getImage(np.sum(transformed.matR, axis=0), k)
                 print(density)
                 words_colors, colorgraph = colorGraph(transformed, words, colors)

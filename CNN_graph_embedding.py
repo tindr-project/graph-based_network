@@ -10,6 +10,7 @@ from keras.utils.vis_utils import model_to_dot
 from keras.utils import plot_model
 from keras.utils import to_categorical
 from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import train_test_split
 
 
 def FloatOrZero(value):
@@ -22,7 +23,7 @@ def FloatOrZero(value):
 def ProteinModel(input_shape):
     X_input = Input(input_shape)
     X = ZeroPadding2D((3, 3))(X_input)
-    X = Conv2D(32, (7, 7), strides=(1, 1), name='conv0')(X)
+    X = Conv2D(32, (5, 5), strides=(1, 1), name='conv0')(X)
     X = BatchNormalization(axis=3, name='bn0')(X)
     X = Activation('relu')(X)
     X = MaxPooling2D((2, 2), name='max_pool')(X)
@@ -33,14 +34,21 @@ def ProteinModel(input_shape):
 
 
 def proteinCNN(X, Y, output):
-    kfold = StratifiedKFold(n_splits=10, shuffle=True, random_state=1)
+    #X_train, X_test, y_train, y_test = train_test_split(
+    #                                    X, Y, test_size=0.10, random_state=42)
+    #X = X_train
+    #Y = y_train
+    #print(X_train.shape)
+    #print("Excluding 20%% of the data for future testing...")
+    #print(X_test.shape)
+    kfold = StratifiedKFold(n_splits=5, shuffle=True, random_state=1)
     cvscores = []
     for train, test in kfold.split(X, Y):
         proteinModel = ProteinModel(X.shape[1:])
         proteinModel.compile(loss="binary_crossentropy",
                              optimizer="Adam", metrics=["accuracy"])
         proteinModel.fit(x=X[train], y=Y[train],
-                         epochs=10, batch_size=20, verbose=0)
+                         epochs=100, batch_size=20, verbose=0)
         preds = proteinModel.evaluate(x=X[test], y=Y[test], verbose=0)
         print("%s: %.2f%%" % (proteinModel.metrics_names[1], preds[1]*100))
         cvscores.append(preds[1] * 100)
