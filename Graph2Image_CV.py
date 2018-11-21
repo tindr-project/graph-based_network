@@ -1,5 +1,5 @@
-# Node2vec functions from node2vec project
 # Embedding + DL architecture: H. Gaspar 2018 hagax8@gmail.com
+# node2vec functions were taken from the node2vec project
 
 from ugtm import eGTM
 from ugtm import landscape
