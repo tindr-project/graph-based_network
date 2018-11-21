@@ -1,5 +1,5 @@
-# Graph-based network
-An embedding and CNN classification algorithm for protein subgraph classification.
+# Graph-based network for subgraph classification
+An embedding and CNN classification algorithm for subgraph classification.
 
 ## Run example
 ```
@@ -24,3 +24,12 @@ Binary labels (0/1) for subgraphs, one per line (name number of lines as the --i
 
 ### --colors
 Covariate, with 2 columns, space-separated, one node per line, without header (node_name float_value, e.g. "mynode_id 8.5"). There should be as many lines as nodes.
+
+
+### Requirements
+- tensorflow
+- keras
+- ugtm
+- networkx
+- gensim
+- numpy
