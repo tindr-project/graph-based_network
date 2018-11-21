@@ -24,4 +24,4 @@ Just the output name.
 Binary labels (0/1) for subgraphs, one per line (name number of lines as the --input file).
 
 ### --colors
-Color (optional covariate), with 2 columns, space-separated, one node per line, without header (node_name float_value, e.g. "mynode_id 8.5").
+Covariate, with 2 columns, space-separated, one node per line, without header (node_name float_value, e.g. "mynode_id 8.5"). There should be as many lines as nodes.
