@@ -147,27 +147,33 @@ def mainworkflow(graph_list, color_file, labels, directed=True, weighted=True, o
     count = 0
     with open(graph_list, 'r') as file:
         xnametrain = [line.strip() for line in file]
-    for inputgraph in xnametrain:
-        try:
-            words, transformed = graphEmbedding(inputgraph,
-                                                directed=directed,
-                                                weighted=weighted)
-            density = getImage(np.sum(transformed.matR, axis=0), k)
-            print(density)
-            words_colors, colorgraph = colorGraph(transformed, words, colors)
-            #transformed.plot_html(output="foo", labels=words_colors,ids=words)
-            colorgraph = getImage(colorgraph, k)
-            stacked = np.dstack((density, colorgraph))
-            stacked = np.expand_dims(stacked, 0)
-            if count == 0:
-                X = stacked
-            else:
-                X = np.concatenate((X, stacked), axis=0)
-            count += 1
-        except:
-            print("Error. Not processing "+str(inputgraph)+".")
+
     with open(labels, 'r') as file:
-        Y = [line.strip() for line in file]
+        lines = file.readlines()
+        for inputgraph in xnametrain:
+            try:
+                words, transformed = graphEmbedding(inputgraph,
+                                                    directed=directed,
+                                                    weighted=weighted)
+                density = getImage(np.sum(transformed.matR, axis=0), k)
+                print(density)
+                words_colors, colorgraph = colorGraph(transformed, words, colors)
+                #transformed.plot_html(output="foo", labels=words_colors,ids=words)
+                colorgraph = getImage(colorgraph, k)
+                stacked = np.dstack((density, colorgraph))
+                stacked = np.expand_dims(stacked, 0)
+                line = lines[count]
+                if count == 0:
+                    X = stacked
+                    Y = [line]
+                else:
+                    X = np.concatenate((X, stacked), axis=0)
+                    Y.append(line)
+                count += 1
+            except:
+                print("Error. Not processing "+str(inputgraph)+".")
+#    with open(labels, 'r') as file:
+#        Y = [line.strip() for line in file]
     Y = np.squeeze(Y)
     proteinCNN(X, Y, output)
 
