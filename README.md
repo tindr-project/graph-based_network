@@ -1,4 +1,4 @@
-# Graph-based network for subgraph classification
+# Neural network for subgraph classification
 An embedding and CNN classification algorithm for subgraph classification.
 
 # Algorithm
