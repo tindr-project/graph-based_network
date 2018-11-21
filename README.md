@@ -6,7 +6,7 @@ An embedding and CNN classification algorithm for subgraph classification.
 - For each subgraph:
 
   1. Compute graph embedding using node2vec (random walks + word2vec algorithm), ndimensions = 128
-  2. Reduce to a 2D dimensional space discretized into a 2D node using generative topographic mapping (GTM), ugtm implementation
+  2. Reduce to a 2D dimensional space discretized into a 2D grid using generative topographic mapping (GTM), ugtm implementation
   3. For a subgraph 2D image (grid), the first channel is node density, the other channels covariates
   
 - Run CNN classification algorithm, with following layers:
