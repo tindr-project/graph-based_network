@@ -21,7 +21,7 @@ List of paths to your subgraphs (one per line). The format of each subgraph shou
 Just the output name.
 
 ### --labels 
-Binary labels (0/1) for subgraphs (name number as number of paths in --input).
+Binary labels (0/1) for subgraphs, one per line (name number of lines as the --input file).
 
 ### --colors
 Color (optional covariate), with 2 columns, space-separated, one node per line, without header (node_name float_value, e.g. "mynode_id 8.5").
