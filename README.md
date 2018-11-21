@@ -1,6 +1,25 @@
 # Graph-based network for subgraph classification
 An embedding and CNN classification algorithm for subgraph classification.
 
+# Algorithm
+- Input = subgraphs, subgraph labels, node colors
+- For each subgraph:
+
+  1. Compute graph embedding using node2vec (random walks + word2vec algorithm), ndimensions = 128
+  2. Reduce to a 2D dimensional space discretized into a 2D node using generative topographic mapping (GTM), ugtm implementation
+  3. For a subgraph 2D image (grid), the first channel is node density, the other channels covariates
+  
+- Run CNN classification algorithm, with following layers:
+
+  1. ZeroPadding2D((3, 3))
+  2. Conv2D(32, (7, 7), strides=(1, 1))
+  3. BatchNormalization
+  4. Relu activation
+  5. MaxPooling2D((2, 2))
+  6. Flatten
+  7. Dense layer with sigmoid activation
+ 
+
 ## Run example (10-fold cross-validation)
 ```
 python Graph2Image_CV.py
