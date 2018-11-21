@@ -9,10 +9,10 @@ An embedding and CNN classification algorithm for subgraph classification.
   2. Reduce to a 2D dimensional space discretized into a 2D grid using generative topographic mapping (GTM), ugtm implementation
   3. For a subgraph 2D image (grid), the first channel is node density, the other channels covariates
   
-- Run CNN classification algorithm, with following layers:
+- Run CNN classification algorithm, with following layers (this architecture will change in the future):
 
   1. ZeroPadding2D((3, 3))
-  2. Conv2D(32, (7, 7), strides=(1, 1))
+  2. Conv2D(32, (5, 5), strides=(1, 1))
   3. BatchNormalization
   4. Relu activation
   5. MaxPooling2D((2, 2))
