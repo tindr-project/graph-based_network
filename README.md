@@ -1,7 +1,7 @@
 # Graph-based network for subgraph classification
 An embedding and CNN classification algorithm for subgraph classification.
 
-## Run example
+## Run example (10-fold cross-validation)
 ```
 python Graph2Image_CV.py
 ```
